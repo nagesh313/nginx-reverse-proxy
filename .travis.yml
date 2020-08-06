@@ -58,7 +58,20 @@ jobs:
         - ls
         - pwd
     - stage: deploy
-      script: ls
+      script: 
+        - cd multiservice-react-app
+        - ls 
+        - cd ..
+        - cd admin
+        - cd target
+        - ls 
+        - cd..
+        - cd..
+        - cd service
+        - cd target
+        - ls 
+        - cd..
+        - cd..
 # script: ls
 # script:
 #   - echo "Hello There!!!"
