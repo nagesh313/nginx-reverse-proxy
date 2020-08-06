@@ -1,0 +1,52 @@
+dist: trusty
+sudo: required
+matrix:
+  include:
+    - language: java
+      jdk: oraclejdk8
+      before_script:
+        - cd service
+      script:
+        - mvn clean install
+      after_script:
+        - ls
+        - cd ..
+    - language: java
+      jdk: oraclejdk8
+      before_script:
+        - cd server
+      script:
+        - mvn clean install
+      after_script:
+        - ls
+        - cd ..
+      # before_cache:
+      #   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+      #   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      # cache:
+      #   directories:
+      #     - $HOME/.gradle/caches/
+      #     - $HOME/.gradle/wrapper/
+      # after_success:
+      #   bash <(curl -s https://codecov.io/bash) -cF server
+    - language: node_js
+      node_js:
+        - "node"
+      before_script:
+        - cd multiservice-react-app
+        - npm install
+      cache:
+        directories:
+          - "node_modules"
+      script:
+        - npm test
+        - npm run coverage
+        - npm run build
+      after_script:
+        - ls
+        - cd ..
+      # after_success:
+      #   bash <(curl -s https://codecov.io/bash) -cF client
+
+notifications:
+    email: false
