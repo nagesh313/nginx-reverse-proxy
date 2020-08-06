@@ -14,15 +14,20 @@ jobs:
         - cd admin
       script:
         - mvn clean install
+        - echo "Deploying to GitHub releases ..."
       after_script:
         - ls
         - cd ..
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+        file: "target/admin-0.0.1-SNAPSHOT.jar"
       cache:
         directories:
         - $HOME/.m2
-      after_success:
-        - ls
-        - pwd
     - stage: compile
       language: java
       jdk: oraclejdk8
@@ -81,8 +86,5 @@ jobs:
 #   - heroku container:login
 #   - heroku container:push web --app=nginx-revese-proxy
 #   - heroku container:release web --app=nginx-revese-proxy
-after_success:
-  - echo "Hello"
-  - aws s3 sync ~/$TRAVIS_BUILD_NUMBER s3://travis-build-stages-shared-storage-test/$TRAVIS_BUILD_NUMBER
 notifications:
     email: false
