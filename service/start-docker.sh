@@ -1,0 +1,1 @@
+docker run --rm -p 80:80 -p 8000:8000 -p 8001:8001 -p 8002:8002 -p 8003:8003 -p 8004:8004 -p 8010:8010 nginx-java-services:latest
