@@ -2,9 +2,13 @@ dist: trusty
 sudo: required
 services:
   - docker
+stages:
+  - compile
+  - deploy
 jobs:
   include:
-    - language: java
+    - stage: compile
+      language: java
       jdk: oraclejdk8
       before_script:
         - cd admin
@@ -19,7 +23,8 @@ jobs:
       after_success:
         - ls
         - pwd
-    - language: java
+    - stage: compile
+      language: java
       jdk: oraclejdk8
       before_script:
         - cd service
@@ -34,7 +39,8 @@ jobs:
       after_success:
         - ls
         - pwd
-    - language: node_js
+    - stage: complie
+      language: node_js
       node_js:
         - "node"
       before_script:
@@ -51,14 +57,16 @@ jobs:
       after_success:
         - ls
         - pwd
+    - stage: deploy
+      script: ls
 # script: ls
-script:
-  - echo "Hello There!!!"
-  - docker ps 
-  - heroku auth:token
-  - docker build -t registry.heroku.com/nginx-revese-proxy/web .
-  - heroku container:login
-  - heroku container:push web --app=nginx-revese-proxy
-  - heroku container:release web --app=nginx-revese-proxy
+# script:
+#   - echo "Hello There!!!"
+#   - docker ps 
+#   - heroku auth:token
+#   - docker build -t registry.heroku.com/nginx-revese-proxy/web .
+#   - heroku container:login
+#   - heroku container:push web --app=nginx-revese-proxy
+#   - heroku container:release web --app=nginx-revese-proxy
 notifications:
     email: false
