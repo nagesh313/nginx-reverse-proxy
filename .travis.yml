@@ -14,7 +14,7 @@ matrix:
     - language: java
       jdk: oraclejdk8
       before_script:
-        - cd server
+        - cd service
       script:
         - mvn clean install
       after_script:
@@ -39,8 +39,6 @@ matrix:
         directories:
           - "node_modules"
       script:
-        - npm test
-        - npm run coverage
         - npm run build
       after_script:
         - ls
