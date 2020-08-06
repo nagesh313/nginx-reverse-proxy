@@ -1,6 +1,8 @@
 dist: trusty
 sudo: required
-matrix:
+services:
+  - docker
+jobs:
   include:
     - language: java
       jdk: oraclejdk8
@@ -26,9 +28,6 @@ matrix:
       after_script:
         - ls
         - cd ..
-      # before_cache:
-      #   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-      #   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
       cache:
         directories:
         - $HOME/.m2
@@ -52,6 +51,12 @@ matrix:
       after_success:
         - ls
         - pwd
-
+script:
+  - docker ps 
+  - heroku auth:token
+  - docker build -t registry.heroku.com/nginx-revese-proxy/web .
+  - heroku container:login
+  - heroku container:push web --app=nginx-revese-proxy
+  - heroku container:release web --app=nginx-revese-proxy
 notifications:
     email: false
