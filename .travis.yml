@@ -51,12 +51,13 @@ jobs:
       after_success:
         - ls
         - pwd
-script:
-  - docker ps 
-  - heroku auth:token
-  - docker build -t registry.heroku.com/nginx-revese-proxy/web .
-  - heroku container:login
-  - heroku container:push web --app=nginx-revese-proxy
-  - heroku container:release web --app=nginx-revese-proxy
+script: ls
+# script:
+#   - docker ps 
+#   - heroku auth:token
+#   - docker build -t registry.heroku.com/nginx-revese-proxy/web .
+#   - heroku container:login
+#   - heroku container:push web --app=nginx-revese-proxy
+#   - heroku container:release web --app=nginx-revese-proxy
 notifications:
     email: false
