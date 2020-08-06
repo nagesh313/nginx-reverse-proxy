@@ -2,9 +2,6 @@ dist: trusty
 sudo: required
 services:
   - docker
-stages:
-  - compile
-  - deploy
 jobs:
   include:
     - stage: compile
@@ -35,9 +32,17 @@ jobs:
         - cd service
       script:
         - mvn clean install
+        - echo "Deploying to GitHub releases ..."
       after_script:
         - ls
         - cd ..
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+        file: "target/service-0.0.1-SNAPSHOT.jar"
       cache:
         directories:
         - $HOME/.m2
@@ -56,27 +61,20 @@ jobs:
           - "node_modules"
       script:
         - npm run build
+        - echo "Deploying to GitHub releases ..."
       after_script:
         - ls
         - cd ..
       after_success:
         - ls
         - pwd
-    - stage: deploy
-      script: 
-        - cd multiservice-react-app
-        - ls 
-        - cd ..
-        - cd admin
-        - cd target
-        - ls 
-        - cd..
-        - cd..
-        - cd service
-        - cd target
-        - ls 
-        - cd..
-        - cd..
+      deploy:
+        provider: releases
+        api_key: $GITHUB_OAUTH_TOKEN
+        skip_cleanup: true
+        on:
+          tags: true
+        file: "build/"
 # script: ls
 # script:
 #   - echo "Hello There!!!"
