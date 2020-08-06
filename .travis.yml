@@ -39,7 +39,7 @@ jobs:
       after_success:
         - ls
         - pwd
-    - stage: complie
+    - stage: compile
       language: node_js
       node_js:
         - "node"
