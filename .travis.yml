@@ -14,6 +14,9 @@ matrix:
       cache:
         directories:
         - $HOME/.m2
+      after_success:
+        - ls
+        - pwd
     - language: java
       jdk: oraclejdk8
       before_script:
@@ -29,8 +32,9 @@ matrix:
       cache:
         directories:
         - $HOME/.m2
-      # after_success:
-      #   bash <(curl -s https://codecov.io/bash) -cF server
+      after_success:
+        - ls
+        - pwd
     - language: node_js
       node_js:
         - "node"
@@ -45,8 +49,9 @@ matrix:
       after_script:
         - ls
         - cd ..
-      # after_success:
-      #   bash <(curl -s https://codecov.io/bash) -cF client
+      after_success:
+        - ls
+        - pwd
 
 notifications:
     email: false
