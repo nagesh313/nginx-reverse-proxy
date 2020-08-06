@@ -81,5 +81,8 @@ jobs:
 #   - heroku container:login
 #   - heroku container:push web --app=nginx-revese-proxy
 #   - heroku container:release web --app=nginx-revese-proxy
+after_success:
+  - echo "Hello"
+  - aws s3 sync ~/$TRAVIS_BUILD_NUMBER s3://travis-build-stages-shared-storage-test/$TRAVIS_BUILD_NUMBER
 notifications:
     email: false
