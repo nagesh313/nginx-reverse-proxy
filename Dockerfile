@@ -10,7 +10,7 @@ RUN rm -rf /build
 RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1.0.0/multiservice-react-app.tar.gz >> front.tar.gz
 RUN tar xvzf front.tar.gz
 RUN rm -rf /usr/share/nginx/html/*
-COPY /build /usr/share/nginx/html
+COPY build/ /usr/share/nginx/html
 RUN curl -L https://raw.githubusercontent.com/nagesh313/nginx-reverse-proxy/master/nginx.conf >> nginx.conf 
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN ["chmod", "777", "start-services.sh"]
