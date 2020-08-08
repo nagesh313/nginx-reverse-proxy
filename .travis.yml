@@ -2,6 +2,9 @@ dist: trusty
 sudo: required
 services:
   - docker
+stages:
+  - compile
+  - deploy
 jobs:
   include:
     - stage: compile
@@ -78,6 +81,14 @@ jobs:
           tags: true
         file: "multiservice-react-app.tar.gz"
         skip_cleanup: true
+    - stage: deploy
+      script: 
+        - docker ps 
+        - heroku auth:token
+        - docker build -t registry.heroku.com/nginx-reverse-proxy/web .
+        - heroku container:login
+        - heroku container:push web --app=nginx-reverse-proxy
+        - heroku container:release web --app=nginx-reverse-proxy
 # script: ls
 # script:
 #   - echo "Hello There!!!"
