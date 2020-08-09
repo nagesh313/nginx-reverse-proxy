@@ -12,6 +12,8 @@ RUN ls
 RUN tar xvzf front.tar.gz
 RUN ls
 RUN rm -rf /usr/share/nginx/html/*
+RUN [ -d "build/" ] && echo "Directory build/ exists."
+RUN [ -d "/usr/share/nginx/html" ] && echo "Directory /usr/share/nginx/html exists."
 COPY build/ /usr/share/nginx/html
 RUN curl -L https://raw.githubusercontent.com/nagesh313/nginx-reverse-proxy/master/nginx.conf >> nginx.conf 
 COPY nginx.conf /etc/nginx/nginx.conf
