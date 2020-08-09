@@ -16,4 +16,4 @@ RUN ls
 # RUN  useradd nginx
 # USER root
 # RUN  ["sh", "start-services.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sudo", "nginx", "-g", "daemon off;"]
