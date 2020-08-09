@@ -1,4 +1,5 @@
 FROM nginx
+USER root
 COPY --from=openjdk:8-jdk-alpine / /
 VOLUME /tmp
 RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1.0.0/admin-0.0.1-SNAPSHOT.jar >> admin.jar
