@@ -6,9 +6,9 @@ RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1
 RUN curl -L https://raw.githubusercontent.com/nagesh313/nginx-reverse-proxy/master/start-services.sh >> start-services.sh 
 COPY start-services.sh start-services.sh
 RUN rm -rf /build
+RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1.0.0/multiservice-react-app.tar.gz >> front.tar.gz
 RUN mkdir build
 RUN ls 
-RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1.0.0/multiservice-react-app.tar.gz >> front.tar.gz
 RUN tar xvzf front.tar.gz
 RUN rm -rf /usr/share/nginx/html/*
 COPY build/ /usr/share/nginx/html
