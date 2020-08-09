@@ -85,7 +85,7 @@ jobs:
       script: 
         - docker ps 
         - heroku auth:token
-        - docker build -t registry.heroku.com/nginx-reverse-proxy-ex/web .
+        - docker build --no-cache -t registry.heroku.com/nginx-reverse-proxy-ex/web .
         - heroku container:login
         - heroku container:push web --app=nginx-reverse-proxy-ex
         - heroku container:release web --app=nginx-reverse-proxy-ex
