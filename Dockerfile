@@ -10,6 +10,7 @@ RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1
 RUN mkdir build
 RUN ls 
 RUN tar xvzf front.tar.gz
+RUN ls
 RUN rm -rf /usr/share/nginx/html/*
 COPY build/ /usr/share/nginx/html
 RUN curl -L https://raw.githubusercontent.com/nagesh313/nginx-reverse-proxy/master/nginx.conf >> nginx.conf 
