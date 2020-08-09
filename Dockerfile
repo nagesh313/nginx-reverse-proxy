@@ -10,7 +10,8 @@ RUN curl -Ls https://github.com/nagesh313/nginx-reverse-proxy/releases/download/
 RUN curl -L https://raw.githubusercontent.com/nagesh313/nginx-reverse-proxy/master/nginx.conf >> nginx.conf 
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN ["chmod", "777", "start-services.sh"]
-COPY *.jar /
+# COPY *.jar /
+RUN ls
 RUN  useradd nginx
 # RUN  ["sh", "start-services.sh"]
 ENTRYPOINT ["./start-services.sh"]
