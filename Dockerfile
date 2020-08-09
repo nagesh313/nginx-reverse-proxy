@@ -1,6 +1,6 @@
-FROM nginx
-USER root
-COPY --from=openjdk:8-jdk-alpine / /
+FROM openjdk:8-jdk-alpine 
+# FROM nginx:alpine
+COPY --from=nginx:alpine / /
 VOLUME /tmp
 RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1.0.0/admin-0.0.1-SNAPSHOT.jar >> admin.jar
 RUN curl -L https://github.com/nagesh313/nginx-reverse-proxy/releases/download/1.0.0/service-0.0.1-SNAPSHOT.jar >> service.jar
@@ -13,8 +13,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 RUN ["chmod", "777", "start-services.sh"]
 # COPY *.jar /
 RUN ls
-RUN useradd nginx
-USER root
+# RUN  useradd nginx
+# USER root
 # RUN  ["sh", "start-services.sh"]
 ENTRYPOINT ["./start-services.sh"]
 # COPY --from=nginx / /
