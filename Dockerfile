@@ -16,4 +16,4 @@ RUN ls
 # RUN  useradd nginx
 # USER root
 # RUN  ["sh", "start-services.sh"]
-ENTRYPOINT ["nginx"]
+RUN ["sh","nginx"]
