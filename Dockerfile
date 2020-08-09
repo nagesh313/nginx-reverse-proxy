@@ -16,4 +16,4 @@ RUN ls
 # RUN  useradd nginx
 # USER root
 # RUN  ["sh", "start-services.sh"]
-ENTRYPOINT ["exec nginx & exec nohup java -Dserver.port=8010 -jar /admin.jar &  exec nohup java -Dserver.port=8000 -jar /service.jar"]
+ENTRYPOINT ["nginx & nohup java -Dserver.port=8010 -jar /admin.jar & nohup java -Dserver.port=8000 -jar /service.jar"]
