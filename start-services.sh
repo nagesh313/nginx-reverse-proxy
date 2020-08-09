@@ -1,6 +1,6 @@
 #!/bin/bash
 echo "Starting nginx"
-exec sudo nginx &
+exec nginx &
 echo "Starting Spring boot Admin and Services"
 exec nohup java -Dserver.port=8010 -jar /admin.jar & 
 # exec nohup java -Dserver.port=8001 -jar /service.jar &
