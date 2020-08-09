@@ -13,7 +13,6 @@ RUN ["chmod", "777", "start-services.sh"]
 # COPY *.jar /
 RUN ls
 RUN useradd nginx
-RUN adduser sudo
 USER root
 # RUN  ["sh", "start-services.sh"]
 ENTRYPOINT ["./start-services.sh"]
